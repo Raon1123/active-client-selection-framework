@@ -11,6 +11,12 @@ CUDA 11.3
 
 # Experiment
 
+## Preprocess
+
+Make particion of each client
+
+## Client selection experiment
+
 # Visualization
 
 # Reference

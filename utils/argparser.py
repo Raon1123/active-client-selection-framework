@@ -16,5 +16,13 @@ def arg_parser():
     parser.add_argument('--method', type=str, default='Random',
         choices=CLIENTSELECTION, help='active client seleciton methods')
 
+    # define global model
+    parser.add_argument('--model', type=str, default='CNN', 
+        choices=MODELS, help='global model')
+
+    # client setting
+    parser.add_argument('--optimizer', type=str, default='SGD',
+        choices=OPTIMIZER, help='local update optimizer')
+
     args = parser.parse_args()
     return args
