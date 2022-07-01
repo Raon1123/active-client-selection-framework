@@ -32,7 +32,7 @@ def arg_parser():
     parser.add_argument('--num_epoch_local', type=int, default=1)
 
     # logger information
-    parser.add_argument('--logdir', type=str, default='logdir', help='root directory of logging')
+    parser.add_argument('--logdir', type=str, default='./logdir', help='root directory of logging')
 
     args = parser.parse_args()
     return args

@@ -6,7 +6,7 @@ Federated learning framework for active client selection method.
 CUDA 11.3 
 
 ```shell
-    conda 
+    conda env create --file environment.yaml
 ```
 
 # Experiment
