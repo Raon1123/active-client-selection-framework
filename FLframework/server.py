@@ -2,12 +2,14 @@ import os
 
 from datasets.getdata import get_traindata, get_evaldata
 from FLframework.clients import Client
+from clientselection.random import random_selection
 
 class Server:
     def __init__(self, model, args):
         self._model_server = model
         self.args = args
         self.possible_clients = self._init_clients()
+        self.selected_clients = []
 
     def _init_clients(self, num_clients, model, args):
         clients = []

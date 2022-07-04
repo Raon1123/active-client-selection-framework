@@ -1,6 +1,23 @@
+import numpy as np
+
 import torch
+import random
+import torch.backends.cudnn as cudnn
 
 from utils.argparser import arg_parser
+
+def fix_seed(seed):
+    torch.manual_seed(seed)
+    torch.cuda.manual_seed(seed)
+    torch.cuda.manual_seed_all(seed)
+
+    np.random.seed(seed)
+
+    cudnn.benchmark = False
+    cudnn.deterministic = True
+
+    random.seed(seed)
+    
 
 def run_round():
     """
@@ -11,6 +28,9 @@ def run_round():
 
 def main():
     args = arg_parser()
+
+    # fix seed
+    fix_seed(args.random_seed)
 
     # make save directory
 

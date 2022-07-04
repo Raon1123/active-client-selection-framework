@@ -22,10 +22,12 @@ def arg_parser():
         choices=MODELS, help='global model')
     parser.add_argument('--update_algo', type=str, default='FedAVG', 
         help='Federated algorithm for update global model')
+    parser.add_argument('--init_model', type=str, default='xaiver',
+        help='initialize method of model')
     parser.add_argument('--lr_global', type=float, default=0.001, help='global model learning rate')
     parser.add_argument('--num_round', type=int, default=2000)
 
-    # client setting
+    # client setting 
     parser.add_argument('--optimizer', type=str, default='SGD',
         choices=OPTIMIZER, help='client update optimizer')
     parser.add_argument('--lr_client', type=float, default=0.1, help='client updating learning rate')
@@ -38,6 +40,10 @@ def arg_parser():
 
     # logger information
     parser.add_argument('--logdir', type=str, default='./logdir', help='root directory of logging')
+
+    # ETC
+    parser.add_argument('--random_seed', type=int, default=3211,
+        help='magical seed for random generation')
 
     args = parser.parse_args()
     return args
