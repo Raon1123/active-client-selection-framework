@@ -6,6 +6,7 @@ def arg_parser():
     parser = argparse.ArgumentParser()
 
     # device information
+    parser.add_argument('--device', type=str, default='cuda')
     parser.add_argument('--gpu_id', type=int, default=0, help='gpu id')
 
     # dataset information
@@ -26,10 +27,14 @@ def arg_parser():
 
     # client setting
     parser.add_argument('--optimizer', type=str, default='SGD',
-        choices=OPTIMIZER, help='local update optimizer')
-    parser.add_argument('--lr_local', type=float, default=0.1, help='local updating learning rate')
-    parser.add_argument('--batch_size_local', type=int, default=64)
-    parser.add_argument('--num_epoch_local', type=int, default=1)
+        choices=OPTIMIZER, help='client update optimizer')
+    parser.add_argument('--lr_client', type=float, default=0.1, help='client updating learning rate')
+    parser.add_argument('--batch_size_client', type=int, default=64)
+    parser.add_argument('--num_epoch_client', type=int, default=1)
+    parser.add_argument('--pin_memory_client', type=bool, default=True, help='pin memory of dataloader in client')
+    parser.add_argument('--num_workers_client', type=int, default=1, help='number of cpu workers at client dataloader')
+    parser.add_argument('--loss_funciton_client', type=str, default='CE', 
+        choices=['CE', 'MSE', 'L1'], help='loss function for client')
 
     # logger information
     parser.add_argument('--logdir', type=str, default='./logdir', help='root directory of logging')

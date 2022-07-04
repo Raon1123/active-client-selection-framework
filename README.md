@@ -17,7 +17,37 @@ Make particion of each client
 
 ## Client selection experiment
 
+### Arguments
+
 # Visualization
 
 # Reference
 
+## LEAF
+
+The main implementation based on LEAF project.
+
+[Project page](https://leaf.cmu.edu/)
+[Git repo](https://github.com/TalwalkarLab/leaf)
+
+```
+@article{DBLP:journals/corr/abs-1812-01097,
+  author    = {Sebastian Caldas and
+               Peter Wu and
+               Tian Li and
+               Jakub Kone{\v{c}}n{\'y} and
+               H. Brendan McMahan and
+               Virginia Smith and
+               Ameet Talwalkar},
+  title     = {{LEAF:} {A} Benchmark for Federated Settings},
+  journal   = {CoRR},
+  volume    = {abs/1812.01097},
+  year      = {2018},
+  url       = {http://arxiv.org/abs/1812.01097},
+  eprinttype = {arXiv},
+  eprint    = {1812.01097},
+  timestamp = {Wed, 23 Dec 2020 09:35:18 +0100},
+  biburl    = {https://dblp.org/rec/journals/corr/abs-1812-01097.bib},
+  bibsource = {dblp computer science bibliography, https://dblp.org}
+}
+```
