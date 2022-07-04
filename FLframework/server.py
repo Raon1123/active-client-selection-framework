@@ -1,10 +1,25 @@
 import os
 
+from datasets.getdata import get_traindata, get_evaldata
+from FLframework.clients import Client
+
 class Server:
     def __init__(self, model, args):
         self._model_server = model
         self.args = args
-        self.possible_clients = []
+        self.possible_clients = self._init_clients()
+
+    def _init_clients(self, num_clients, model, args):
+        clients = []
+
+        train_data = get_traindata(args)
+        eval_data = get_evaldata(args)
+
+        for client_id in range(num_clients):
+            client = Client(client_id, train_data, eval_data, model, args)
+            clients.append(client)
+
+        return clients
 
     def _distribute_server(self):
         """

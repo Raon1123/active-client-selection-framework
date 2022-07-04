@@ -31,7 +31,7 @@ def get_lossf(loss_str):
     return lossf
 
 
-class Clients:
+class Client:
     def __init__(self,
         client_id,
         train_data,
