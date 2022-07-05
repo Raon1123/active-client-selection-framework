@@ -37,11 +37,18 @@ class Client:
         train_data,
         eval_data,
         model,
+        device,
         args):
         """
         initialize clients
+
         Input
-        - train_data
+        - client_id (int): identical number of client
+        - train_data (pytorch Data): local training dataset
+        - eval_data (pytorch Data): local evaluation dataset
+        - model (pytorch model): model of client, usually the same as model of server
+        - device (int): specific gpu number for training
+
         Output
         - None
         """
@@ -61,12 +68,12 @@ class Client:
         self.pin_memory = args.pin_memory_client
         self.num_workers = args.num_workers_client
         
-        if args.device == 'cuda':
-            self.device = 'cuda:' + args.gpu_id
+        if device in range(torch.cuda.device_count()):
+            self.device = 'cuda:' + device
         else:
             self.device = 'cpu'
 
-        self.loss = 0.0
+        self.loss = 0.0 # loss for epoch
 
     def _train_epoch(self, dataloader, optimizer):
         running_loss = 0.0

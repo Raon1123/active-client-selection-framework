@@ -1,8 +1,9 @@
-import os
+import os, copy
+import torch
 
 from datasets.getdata import get_traindata, get_evaldata
 from FLframework.clients import Client
-from clientselection.random import random_selection
+from clientselection.random_selection import random_selection
 
 class Server:
     def __init__(self, model, args):
@@ -11,25 +12,35 @@ class Server:
         self.possible_clients = self._init_clients()
         self.selected_clients = []
 
+    def _get_possible_clients(self):
+        idx_list = []
+
+        for client in self.possible_clients:
+            idx_list.append(client)
+
+        return idx_list
+
     def _init_clients(self, num_clients, model, args):
         clients = []
+        num_gpus = torch.cuda.device_count()
 
         train_data = get_traindata(args)
         eval_data = get_evaldata(args)
 
         for client_id in range(num_clients):
-            client = Client(client_id, train_data, eval_data, model, args)
+            device_id = client_id % num_gpus # may be... distribute the same number of client for each gpu
+            client = Client(client_id, train_data, eval_data, model, device_id, args)
             clients.append(client)
 
         return clients
 
     def _distribute_server(self):
         """
-        direct copy of global model?
+        direct copy of global model? 
         https://discuss.pytorch.org/t/can-i-deepcopy-a-model/52192
         """
         for client in self.possible_clients:
-            client.update_client(self._model_server)
+            client.update_client(copy.deepcopy(self._model_server))
 
     def _train_client(self):
         """
@@ -42,7 +53,12 @@ class Server:
         """
         select client
         """
-        pass
+        self.selected_clients = []
+
+        if self.args.method == 'Random':
+            self.selected_clients = random_selection(self._get_possible_clients())
+
+        assert len(self.selected_clients) > 0
 
     def _aggregate_client(self, clients):
         """

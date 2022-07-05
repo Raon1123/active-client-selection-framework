@@ -1,6 +1,13 @@
 # active-client-selection-framework
 Federated learning framework for active client selection method.
 
+# Remain Works
+- [] Implement non-iid dataset split and pytorch Data
+- [] Implement FL algorithms
+- [] Implement active client selection methods
+- [] Tensorboard logging
+- [] Result visualization 
+
 # Requirements
 
 CUDA 11.3 
