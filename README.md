@@ -58,3 +58,9 @@ The main implementation based on LEAF project.
   bibsource = {dblp computer science bibliography, https://dblp.org}
 }
 ```
+
+## EMNIST
+
+[The EMNIST Dataset](https://www.nist.gov/itl/products-and-services/emnist-dataset)
+
+Cohen, G., Afshar, S., Tapson, J., & van Schaik, A. (2017). EMNIST: an extension of MNIST to handwritten letters. Retrieved from http://arxiv.org/abs/1702.05373

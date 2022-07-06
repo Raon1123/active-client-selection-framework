@@ -1,4 +1,6 @@
 import os, copy
+
+from tqdm import tqdm
 import torch
 
 from datasets.getdata import get_traindata, get_evaldata
@@ -10,7 +12,6 @@ class Server:
         self._model_server = model
         self.args = args
         self.possible_clients = self._init_clients()
-        self.selected_clients = []
 
     def _get_possible_clients(self):
         idx_list = []
@@ -21,6 +22,9 @@ class Server:
         return idx_list
 
     def _init_clients(self, num_clients, model, args):
+        """
+        Initialize clients
+        """
         clients = []
         num_gpus = torch.cuda.device_count()
 
@@ -36,6 +40,7 @@ class Server:
 
     def _distribute_server(self):
         """
+        Distribute global server model to clients.
         direct copy of global model? 
         https://discuss.pytorch.org/t/can-i-deepcopy-a-model/52192
         """
@@ -46,29 +51,48 @@ class Server:
         """
         train each client
         """
+        pbar = tqdm(self.possible_clients, desc='Train clients') # progress bar
+
         for client in self.possible_clients:
-            client.train_client()
+            loss = client.train_client()
+            pbar.set_postfix({'loss': loss})
 
     def _select_client(self):
         """
         select client
         """
-        self.selected_clients = []
+        selected_clients = []
 
         if self.args.method == 'Random':
-            self.selected_clients = random_selection(self._get_possible_clients())
+            selected_clients = random_selection(self.possible_clients)
+        elif self.args.method == 'MaxEntropy':
+            pass
+        elif self.args.method == 'MinEntropy':
+            pass
+        elif self.args.method == 'MaxLoss':
+            pass
+        elif self.args.method == 'MinLoss':
+            pass
 
-        assert len(self.selected_clients) > 0
+        assert len(selected_clients) > 0
+
+        return selected_clients
 
     def _aggregate_client(self, clients):
         """
-        aggreate information (score, loss or entropy etc.) from selected clients
+        aggreate information (score, loss or entropy etc.) from selected clients 
+        *FIXIT* temporaly FedAVG, encapsulate each algorithm and... apply here
+
         input
         - clients (list of Client): selected client list
+
         output
         None
         """
-        pass
+        pbar = tqdm(clients, desc='Aggregate clients')
+
+        for client in pbar:
+            pass
 
     def _update_server(self):
         pass

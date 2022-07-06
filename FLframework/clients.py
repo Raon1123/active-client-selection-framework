@@ -127,6 +127,8 @@ class Client:
         for epoch in self.epochs:
             self._train_epoch(dataloader, optimizer)
 
+        return self._get_loss()
+
     def eval_client(self):
         dataloader = DataLoader(self._eval_data, batch_size=self.batch_size, 
             shuffle=False, pin_memory=self.pin_memory, num_workers=self.num_workers)
