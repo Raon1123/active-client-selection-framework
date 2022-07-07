@@ -2,11 +2,11 @@
 Federated learning framework for active client selection method.
 
 # Remain Works
-- [] Implement non-iid dataset split and pytorch Data
-- [] Implement FL algorithms
-- [] Implement active client selection methods
-- [] Tensorboard logging
-- [] Result visualization 
+- Implement non-iid dataset split and pytorch Data
+- Implement FL algorithms
+- Implement active client selection methods
+- Tensorboard logging (partially done)
+- Result visualization 
 
 # Requirements
 
@@ -27,6 +27,34 @@ Make particion of each client
 ### Arguments
 
 # Visualization
+
+# Directory
+
+```
+├── clientselection
+│   ├── entropy_selection.py
+│   ├── loss_selection.py
+│   └── random_selection.py
+├── datasets
+│   ├── FedCelebA.py
+│   ├── FedCIFAR100.py
+│   ├── FedEMNIST_iid.py
+│   ├── FedEMNIST.py
+│   ├── FedReddit.py
+│   └── getdata.py
+├── environment.yaml
+├── FLframework
+│   ├── clients.py
+│   └── server.py
+├── main.py
+├── models
+│   └── cnn.py
+├── README.md
+└── utils
+    ├── argparser.py
+    ├── constants.py
+    └── logger.py
+```
 
 # Reference
 

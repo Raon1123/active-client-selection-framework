@@ -34,6 +34,8 @@ def main():
 
     # make save directory
 
+    # preprocessing
+
     # initialize clients
 
     # simulate round
