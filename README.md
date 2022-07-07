@@ -31,11 +31,11 @@ Make particion of each client
 # Directory
 
 ```
-├── clientselection
+├── clientselection # client selection methods
 │   ├── entropy_selection.py
 │   ├── loss_selection.py
 │   └── random_selection.py
-├── datasets
+├── datasets # federated learning dataset preprocessor
 │   ├── FedCelebA.py
 │   ├── FedCIFAR100.py
 │   ├── FedEMNIST_iid.py
@@ -43,13 +43,11 @@ Make particion of each client
 │   ├── FedReddit.py
 │   └── getdata.py
 ├── environment.yaml
-├── FLframework
+├── FLframework # Federated learning frameworks
 │   ├── clients.py
 │   └── server.py
-├── main.py
-├── models
+├── models # client models
 │   └── cnn.py
-├── README.md
 └── utils
     ├── argparser.py
     ├── constants.py
