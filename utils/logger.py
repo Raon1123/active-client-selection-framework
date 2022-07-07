@@ -24,7 +24,6 @@ def get_writer(root_log, experiment):
     Output
     - writer (SummaryWriter): tensorboard writter for logging
     """
-
     log_dir = os.path.join(root_log, experiment)
 
     writer = SummaryWriter(log_dir=log_dir)
